@@ -5,7 +5,7 @@ info:
   version: 1.0.0
 
 schemes:
-HTTP
+  - http
 
 tags:
   - name: Iteration 0
@@ -39,10 +39,12 @@ components:
       type: string
       example: "Doe"
     AmountPos:
-      type: float
+      type: number
+      format: float
       example: 100.00
     AmountNeg:
-      type: float
+      type: number
+      format: float
       example: -100.00
 
   group:
@@ -62,11 +64,12 @@ components:
       type: object
       properties:
         amount:
-          type: float
+          type: number
+          format: float
           example: 100.00
         name:
           type: string
-          example:
+          example: "Restaurant cheque"
         category:
           type: string
           enum: [FOOD, HOUSING, ENTERTAINMENT, TRANSPORT, OTHER]
