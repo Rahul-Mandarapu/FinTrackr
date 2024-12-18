@@ -21,7 +21,7 @@ tags:
   - name: Iteration 5
     description: Financial advice state (LLM)
 
-components:
+definitions:
   prim:
     Error:
       type: string
@@ -46,6 +46,9 @@ components:
       type: number
       format: float
       example: -100.00
+    UserId:
+      type: number
+      example: 123
 
   group:
     User:
@@ -77,6 +80,62 @@ components:
         description:
           type: string
           example: "Ate at a restaurant"
-  
+  body:
+    Register:
+      in: body
+      name: body
+      required: true
+      schema:
+        type: object
+         properties:
+          email:
+            $ref: '#/definitions/prim/Email'
+          password:
+            $ref: '#/definitions/prim/Password'
+          nameFirst:
+            $ref: '#/definitions/prim/NameFirst'
+          nameLast:
+            $ref: '#/definitions/prim/NameLast'
+  return:
+    UserId:
+      type: object
+      properties:
+        token:
+          $ref: '#/definitions/prim/UserId'
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/definitions/prim/Error'
+
+
+
+paths:
+  /v1/auth/register:
+    post:
+      summary: Register a new user
+      description: Takes in information about a new user and registers them in the system.
+      tags:
+        - Iteration 0
+      parameters:
+        - $ref: '#/definitions/body/register'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/return/UserId'
+        400:
+          description: |
+            If any of the following are true:
+            - Email address is used by another user
+            - Email is not one as per Validator.isEmail
+            - NameFirst contains characters other than lowercase, uppercase, spaces, hyphens, and apostrophes.
+            - NameFirst is between 2 and 20 characters
+            - NameLast contains characters other than lowercase, uppercase, spaces, hyphens, and apostrophes.
+            - NameLast is between 2 and 20 characters
+            - Password is less than 8 characters
+            - Password doesn't contain at least one number and one letter
+          schema:
+            $ref: '#/definitions/return/Error'
 
 
