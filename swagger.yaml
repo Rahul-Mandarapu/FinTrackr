@@ -87,7 +87,7 @@ definitions:
       required: true
       schema:
         type: object
-         properties:
+        properties:
           email:
             $ref: '#/definitions/prim/Email'
           password:
