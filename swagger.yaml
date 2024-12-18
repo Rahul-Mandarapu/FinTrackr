@@ -1,0 +1,79 @@
+swagger: "2.0"
+info:
+  title: FinTrackr API
+  description: Endpoints specifications and error conditions and messages for front-end organization
+  version: 1.0.0
+
+schemes:
+HTTP
+
+tags:
+  - name: Iteration 0
+    description: Standard authentication, data store and persistence 
+  - name: Iteration 1
+    description: Data entry state (Manual and SQL)
+  - name: Iteration 2
+    description: Data display state
+  - name: Iteration 3
+    description: GUI, session handler and deployment
+  - name: Iteration 4
+    description: Categorization suggestion state (NLP)
+  - name: Iteration 5
+    description: Financial advice state (LLM)
+
+components:
+  prim:
+    Error:
+      type: string
+      example: "Specific error message here"
+    Email:
+      type: string
+      example: "example@gmail.com"
+    Password:
+      type: string
+      example: "Password123"
+    NameFirst:
+      type: string
+      example: "John"
+    NameLast:
+      type: string
+      example: "Doe"
+    AmountPos:
+      type: float
+      example: 100.00
+    AmountNeg:
+      type: float
+      example: -100.00
+
+  group:
+    User:
+      type: object
+      properties:
+        userId:
+          type: number
+          example: 123
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          example: "example@gmail.com"
+    Transaction:
+      type: object
+      properties:
+        amount:
+          type: float
+          example: 100.00
+        name:
+          type: string
+          example:
+        category:
+          type: string
+          enum: [FOOD, HOUSING, ENTERTAINMENT, TRANSPORT, OTHER]
+          example: "FOOD"
+        description:
+          type: string
+          example: "Ate at a restaurant"
+  
+
+
